@@ -36,6 +36,6 @@ public class Task3 {
     }
 
     public static void main(String[] args) {
-        countWordFrequencies("src/main/java/words.txt");
+        countWordFrequencies("src/main/resources/words.txt");
     }
 }

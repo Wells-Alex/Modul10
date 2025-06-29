@@ -9,37 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task2 {
-    private String name;
-    private int age;
-
-    public Task2() {}
-
-    public Task2(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public static void main(String[] args) {
-        List<Task2> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
         try {
-            List<String> lines = Files.readAllLines(Paths.get("src/main/java/file2.txt"));
+            List<String> lines = Files.readAllLines(Paths.get("src/main/resources/file2.txt"));
             if (lines.isEmpty()) {
                 System.out.println("Файл пустой");
                 return;
@@ -60,15 +35,16 @@ public class Task2 {
                     }
                 }
 
-                users.add(new Task2(name, age));
+                users.add(new User(name, age));
             }
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            mapper.writeValue(new File("src/main/java/user.json"), users);
+            mapper.writeValue(new File("src/main/resources/user.json"), users);
 
             System.out.println("Файл user.json создан");
         } catch (IOException e) {
+            System.err.println("Ошибка при работе с файлом:");
             e.printStackTrace();
         }
     }
